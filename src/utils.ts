@@ -23,6 +23,22 @@ export function isTodo(obj: unknown): obj is Todo {
   );
 }
 
+export function formatDate(timestampStr: string): string {
+  const timestamp = parseInt(timestampStr);
+  if (isNaN(timestamp)) {
+    return ' ';
+  }
+  const date = new Date(timestamp);
+  return date.toLocaleString('id-ID', {
+    day: '2-digit',
+    month: '2-digit',
+    year: 'numeric',
+    hour: '2-digit',
+    minute: '2-digit',
+    second: '2-digit'
+  }) + ' Wib';
+}
+
 export function isTodoArray(obj: unknown): obj is Todo[] {
   return Array.isArray(obj) && obj.every(isTodo);
 }

@@ -6,6 +6,10 @@ import { Todo } from './types';
 
 import { readTodos, writeTodos } from './storage';
 
+// Import fungsi helper untuk menampilkan tanggal/waktu dengan format yang bagus
+
+import { formatDate } from './utils';
+
 export class TodoService {
   private todos: Todo[];
 
@@ -68,6 +72,7 @@ deleteTodoByIndex(index: number): boolean {
 // - Tambahkan status [ACTIVE] atau [DONE] di depan setiap To-Do
 // - Berikan nomor urut untuk memudahkan user memilih
  
+
 listTodos(): void {
     if (this.todos.length === 0) {
       console.log('Belum ada data To-Do. Silakan tambahkan tugas baru!');
@@ -76,7 +81,9 @@ listTodos(): void {
 
     this.todos.forEach((todo, index) => {
       const status = todo.isCompleted ? '[DONE]  ' : '[ACTIVE]';
-      console.log(`${status} ${index + 1}. ${todo.task}`);
+      const timeInfo = formatDate(todo.id);
+      
+      console.log(`${status} ${index + 1}. ${todo.task} (${timeInfo})`);
     });
   }
 
@@ -97,7 +104,9 @@ searchTodos(keyword: string): void {
     console.log(`\nHasil pencarian untuk kata kunci "${keyword}":`);
     matches.forEach((item) => {
       const status = item.todo.isCompleted ? '[DONE]  ' : '[ACTIVE]';
-      console.log(`${status} ${item.originalIndex + 1}. ${item.todo.task}`);
+      const timeInfo = formatDate(item.todo.id);
+
+      console.log(`${status} ${item.originalIndex + 1}. ${item.todo.task} (${timeInfo})`);
     });
   }
 }
