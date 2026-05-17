@@ -1,5 +1,3 @@
-/// <reference types="node" />
-
 // TODO: Import readline untuk membaca input dari command line
 
 import * as readline from 'readline';
